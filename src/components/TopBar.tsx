@@ -1,15 +1,11 @@
-import { Bell, Search, Star } from 'lucide-react';
+import { Bell, Star } from 'lucide-react';
 import { artisan } from '@/data';
 import type { View } from '@/types';
 
 const viewTitles: Record<View, { title: string; subtitle: string }> = {
-  dashboard: { title: 'Dashboard', subtitle: 'Your AI Business Manager at a glance' },
-  catalog: { title: 'My Catalogue', subtitle: 'Manage and organize your products' },
-  'photo-studio': { title: 'Photo Studio', subtitle: 'AI-powered professional product photography' },
-  'voice-catalog': { title: 'Voice Catalogue', subtitle: 'Speak in your language, we build the listing' },
-  'market-linkage': { title: 'Market Linkage', subtitle: 'AI-matched buyers and markets for your craft' },
-  channels: { title: 'Channels', subtitle: 'Publish your products across platforms' },
-  insights: { title: 'Insights', subtitle: 'Track your performance and growth' },
+  home: { title: 'Home', subtitle: 'Your AI Business Manager' },
+  upload: { title: 'Add Product', subtitle: 'Upload a product and get instant AI insights' },
+  bidding: { title: 'Bidding Market', subtitle: 'Location-based marketplace for artisans & buyers' },
 };
 
 interface TopBarProps {
@@ -29,16 +25,6 @@ export function TopBar({ currentView }: TopBarProps) {
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Search */}
-          <div className="hidden md:flex items-center gap-2 px-3 py-2 rounded-xl bg-white border border-stone-200 w-56 lg:w-64">
-            <Search className="w-4 h-4 text-stone-400" />
-            <input
-              type="text"
-              placeholder="Search products..."
-              className="bg-transparent text-sm text-stone-700 placeholder:text-stone-400 outline-none flex-1"
-            />
-          </div>
-
           {/* Notifications */}
           <button className="relative p-2.5 rounded-xl bg-white border border-stone-200 hover:bg-stone-50 transition-colors">
             <Bell className="w-4.5 h-4.5 text-stone-600" />

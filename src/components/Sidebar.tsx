@@ -1,41 +1,35 @@
 import { useState } from 'react';
 import {
-  LayoutDashboard,
-  Package,
-  Camera,
-  Mic,
-  TrendingUp,
-  Share2,
-  BarChart3,
+  Home,
+  Upload,
+  Gavel,
   Sparkles,
   Menu,
   X,
+  LogOut,
 } from 'lucide-react';
 import type { View } from '@/types';
 
 interface NavItem {
   id: View;
   label: string;
-  icon: typeof LayoutDashboard;
+  icon: typeof Home;
   description: string;
 }
 
 const navItems: NavItem[] = [
-  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, description: 'Overview & insights' },
-  { id: 'catalog', label: 'My Catalogue', icon: Package, description: 'Manage products' },
-  { id: 'photo-studio', label: 'Photo Studio', icon: Camera, description: 'AI photo enhancer' },
-  { id: 'voice-catalog', label: 'Voice Catalogue', icon: Mic, description: 'Voice to catalogue' },
-  { id: 'market-linkage', label: 'Market Linkage', icon: TrendingUp, description: 'Match with buyers' },
-  { id: 'channels', label: 'Channels', icon: Share2, description: 'Publish & share' },
-  { id: 'insights', label: 'Insights', icon: BarChart3, description: 'Performance analytics' },
+  { id: 'home', label: 'Home', icon: Home, description: 'Your AI Manager' },
+  { id: 'upload', label: 'Add Product', icon: Upload, description: 'Upload & get AI insights' },
+  { id: 'bidding', label: 'Bidding Market', icon: Gavel, description: 'Sell to buyers near you' },
 ];
 
 interface SidebarProps {
   currentView: View;
   onNavigate: (view: View) => void;
+  onLogout: () => void;
 }
 
-export function Sidebar({ currentView, onNavigate }: SidebarProps) {
+export function Sidebar({ currentView, onNavigate, onLogout }: SidebarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleNavigate = (view: View) => {
@@ -98,16 +92,16 @@ export function Sidebar({ currentView, onNavigate }: SidebarProps) {
                 <button
                   key={item.id}
                   onClick={() => handleNavigate(item.id)}
-                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group ${
+                  className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-200 group ${
                     active
                       ? 'bg-primary-50 text-primary-700'
                       : 'text-stone-600 hover:bg-stone-50 hover:text-stone-900'
                   }`}
                 >
-                  <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors ${
+                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
                     active ? 'bg-primary-600 text-white' : 'bg-stone-100 text-stone-500 group-hover:bg-stone-200'
                   }`}>
-                    <Icon className="w-4.5 h-4.5" strokeWidth={2} />
+                    <Icon className="w-5 h-5" strokeWidth={2} />
                   </div>
                   <div className="flex-1 text-left">
                     <p className={`text-sm font-semibold ${active ? 'text-primary-700' : 'text-stone-700'}`}>{item.label}</p>
@@ -119,20 +113,17 @@ export function Sidebar({ currentView, onNavigate }: SidebarProps) {
           </div>
         </nav>
 
-        {/* AI Assistant card */}
+        {/* Logout */}
         <div className="p-3">
-          <div className="bg-gradient-to-br from-stone-900 to-stone-800 rounded-2xl p-4 text-white">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-8 h-8 rounded-lg bg-primary-500/20 flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-primary-400" />
-              </div>
-              <p className="text-sm font-semibold">AI Assistant</p>
+          <button
+            onClick={onLogout}
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-stone-500 hover:bg-error-50 hover:text-error-600 transition-colors"
+          >
+            <div className="w-9 h-9 rounded-lg bg-stone-100 flex items-center justify-center">
+              <LogOut className="w-4.5 h-4.5" />
             </div>
-            <p className="text-xs text-stone-300 mb-3 leading-relaxed">Need help? Ask me to create a catalogue, suggest prices, or find buyers.</p>
-            <button className="w-full bg-white/10 hover:bg-white/20 rounded-lg py-2 text-xs font-medium transition-colors">
-              Ask Karigar AI
-            </button>
-          </div>
+            <span className="text-sm font-medium">Logout</span>
+          </button>
         </div>
       </aside>
     </>
