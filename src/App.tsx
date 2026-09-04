@@ -8,10 +8,16 @@ import { VoiceCatalog } from '@/views/VoiceCatalog';
 import { MarketLinkage } from '@/views/MarketLinkage';
 import { Channels } from '@/views/Channels';
 import { Insights } from '@/views/Insights';
+import { LoginPage } from '@/views/LoginPage';
 import type { View } from '@/types';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [view, setView] = useState<View>('dashboard');
+
+  if (!isLoggedIn) {
+    return <LoginPage onLogin={() => setIsLoggedIn(true)} />;
+  }
 
   const renderView = () => {
     switch (view) {
