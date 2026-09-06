@@ -24,7 +24,7 @@ interface HomeProps {
 const aiResponses: { keywords: string[]; reply: string }[] = [
   {
     keywords: ['price', 'pricing', 'cost', 'rate', 'kitna', 'kimat'],
-    reply: 'Based on current market data for blue pottery in your region, I recommend pricing your vase between ₹1,200 and ₹1,800. Similar products on Amazon Karigar are selling at ₹1,450 average. Your craftsmanship quality scores 87/100, so you can price slightly above average. Would you like me to list it at ₹1,450?',
+    reply: 'Based on current market data for blue pottery in your region, I recommend pricing your vase between ₹1,200 and ₹1,800. Similar products on Amazon KalaKart are selling at ₹1,450 average. Your craftsmanship quality scores 87/100, so you can price slightly above average. Would you like me to list it at ₹1,450?',
   },
   {
     keywords: ['buyer', 'buy', 'market', 'sell', 'customer', 'grahak'],

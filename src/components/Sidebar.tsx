@@ -61,7 +61,7 @@ export function Sidebar({ currentView, onNavigate, onLogout }: SidebarProps) {
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
             <Sparkles className="w-5 h-5 text-white" />
           </div>
-          <span className="font-display font-bold text-lg text-stone-900">KARIGAR<span className="text-primary-600"> AI</span></span>
+          <span className="font-display font-bold text-lg text-stone-900">KalaKart<span className="text-primary-600"> AI</span></span>
         </div>
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -89,7 +89,7 @@ export function Sidebar({ currentView, onNavigate, onLogout }: SidebarProps) {
             <Sparkles className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="font-display font-bold text-lg text-stone-900 leading-none">KARIGAR<span className="text-primary-600"> AI</span></h1>
+            <h1 className="font-display font-bold text-lg text-stone-900 leading-none">KalaKart<span className="text-primary-600"> AI</span></h1>
             <p className="text-[10px] text-stone-400 font-medium tracking-wide uppercase mt-0.5">{t('ai_business_manager')}</p>
           </div>
         </div>

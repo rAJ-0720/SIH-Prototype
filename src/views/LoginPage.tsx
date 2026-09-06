@@ -181,7 +181,7 @@ export function LoginPage({ onLogin }: LoginPageProps) {
             <Sparkles className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="font-display font-bold text-xl text-white leading-none">KARIGAR<span className="text-primary-400"> AI</span></h1>
+            <h1 className="font-display font-bold text-xl text-white leading-none">KalaKart<span className="text-primary-400"> AI</span></h1>
             <p className="text-[10px] text-stone-400 font-medium tracking-wide uppercase mt-1">{t('ai_business_manager')}</p>
           </div>
         </div>
@@ -216,7 +216,7 @@ export function LoginPage({ onLogin }: LoginPageProps) {
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-soft">
               <Sparkles className="w-5 h-5 text-white" />
             </div>
-            <h1 className="font-display font-bold text-lg text-stone-900">KARIGAR<span className="text-primary-600"> AI</span></h1>
+            <h1 className="font-display font-bold text-lg text-stone-900">KalaKart<span className="text-primary-600"> AI</span></h1>
           </div>
 
           {/* Step: Language selection */}
