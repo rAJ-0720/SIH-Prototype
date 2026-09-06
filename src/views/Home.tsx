@@ -9,9 +9,12 @@ import {
   TrendingUp,
   ArrowRight,
   Bot,
+  Mic,
+  MicOff,
 } from 'lucide-react';
 import { artisan, products, initialChatMessages, aiSuggestions } from '@/data';
 import { useLanguage } from '@/language-context';
+import { type LangCode } from '@/i18n';
 import type { View, ChatMessage } from '@/types';
 
 interface HomeProps {
@@ -46,15 +49,52 @@ function getAiResponse(userText: string): string {
 }
 
 export function Home({ onNavigate }: HomeProps) {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [messages, setMessages] = useState<ChatMessage[]>(initialChatMessages);
   const [input, setInput] = useState('');
   const [aiTyping, setAiTyping] = useState(false);
+  const [voiceListening, setVoiceListening] = useState(false);
+  const [voiceError, setVoiceError] = useState('');
   const scrollRef = useRef<HTMLDivElement>(null);
+  const recognitionRef = useRef<any>(null);
+
+  const speechSupported = typeof window !== 'undefined' && ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window);
+
+  const speechLangMap: Record<LangCode, string> = {
+    en: 'en-IN', hi: 'hi-IN', bn: 'bn-IN', te: 'te-IN', mr: 'mr-IN',
+    ta: 'ta-IN', gu: 'gu-IN', kn: 'kn-IN', ml: 'ml-IN', pa: 'pa-IN',
+    or: 'or-IN', as: 'as-IN',
+  };
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
   }, [messages, aiTyping]);
+
+  const toggleVoice = () => {
+    if (!speechSupported) { setVoiceError(t('voice_unsupported')); return; }
+    if (voiceListening) {
+      recognitionRef.current?.stop();
+      setVoiceListening(false);
+      return;
+    }
+    setVoiceError('');
+    setVoiceListening(true);
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.lang = speechLangMap[lang] || 'en-IN';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+    recognitionRef.current = recognition;
+
+    recognition.onresult = (event: any) => {
+      const transcript = event.results[0][0].transcript;
+      setInput(prev => prev ? `${prev} ${transcript}` : transcript);
+      setVoiceListening(false);
+    };
+    recognition.onerror = () => { setVoiceListening(false); setVoiceError(t('voice_error')); };
+    recognition.onend = () => setVoiceListening(false);
+    recognition.start();
+  };
 
   const sendMessage = (text: string) => {
     if (!text.trim()) return;
@@ -205,19 +245,33 @@ export function Home({ onNavigate }: HomeProps) {
           )}
 
           <div className="p-4 border-t border-stone-100">
+            {voiceError && (
+              <p className="text-xs text-error-600 mb-2 flex items-center gap-1">
+                <span className="w-1 h-1 rounded-full bg-error-500" /> {voiceError}
+              </p>
+            )}
             <div className="flex items-center gap-2 bg-stone-50 rounded-xl border border-stone-200 pr-2">
               <input
                 type="text"
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 onKeyDown={e => { if (e.key === 'Enter') sendMessage(input); }}
-                placeholder={t('ask_anything')}
+                placeholder={voiceListening ? t('voice_listening') : t('ask_anything')}
                 className="flex-1 bg-transparent px-4 py-3 text-sm text-stone-700 placeholder:text-stone-400 outline-none"
               />
               <button
+                onClick={toggleVoice}
+                className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors flex-shrink-0 ${
+                  voiceListening ? 'bg-error-500 text-white animate-pulse' : 'bg-stone-200 text-stone-600 hover:bg-stone-300'
+                }`}
+                title={t('voice_input')}
+              >
+                {voiceListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+              </button>
+              <button
                 onClick={() => sendMessage(input)}
                 disabled={!input.trim()}
-                className="w-9 h-9 rounded-lg bg-primary-600 hover:bg-primary-700 disabled:opacity-40 disabled:pointer-events-none text-white flex items-center justify-center transition-colors"
+                className="w-9 h-9 rounded-lg bg-primary-600 hover:bg-primary-700 disabled:opacity-40 disabled:pointer-events-none text-white flex items-center justify-center transition-colors flex-shrink-0"
               >
                 <Send className="w-4 h-4" />
               </button>

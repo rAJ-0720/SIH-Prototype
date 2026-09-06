@@ -1,14 +1,22 @@
 import { Bell, Star } from 'lucide-react';
-import { artisan } from '@/data';
+import { artisan, buyer } from '@/data';
 import { useLanguage } from '@/language-context';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import type { View } from '@/types';
 import type { TKey } from '@/i18n';
 
-const viewTitleKeys: Record<View, { title: TKey; subtitle: TKey }> = {
+const artisanViewTitles: Record<string, { title: TKey; subtitle: TKey }> = {
   home: { title: 'home', subtitle: 'ai_business_manager' },
   upload: { title: 'add_product_nav', subtitle: 'upload_photo_desc' },
   bidding: { title: 'bidding_nav', subtitle: 'live_bidding_desc' },
+};
+
+const buyerViewTitles: Record<string, { title: TKey; subtitle: TKey }> = {
+  buyer_home: { title: 'buyer_dashboard', subtitle: 'buyer_home_desc' },
+  bidding: { title: 'bidding_nav', subtitle: 'browse_market_desc' },
+  buyer_orders: { title: 'my_orders', subtitle: 'my_orders_desc' },
+  buyer_addresses: { title: 'saved_addresses', subtitle: 'saved_addresses_desc' },
+  buyer_payments: { title: 'payment_methods', subtitle: 'payment_methods_desc' },
 };
 
 interface TopBarProps {
@@ -16,8 +24,10 @@ interface TopBarProps {
 }
 
 export function TopBar({ currentView }: TopBarProps) {
-  const { t } = useLanguage();
-  const { title, subtitle } = viewTitleKeys[currentView];
+  const { t, role } = useLanguage();
+  const viewTitles = role === 'buyer' ? buyerViewTitles : artisanViewTitles;
+  const { title, subtitle } = viewTitles[currentView] ?? (role === 'buyer' ? buyerViewTitles.buyer_home : artisanViewTitles.home);
+  const profile = role === 'buyer' ? buyer : artisan;
 
   return (
     <header className="sticky top-0 z-30 bg-stone-50/80 backdrop-blur-md border-b border-stone-200/60">
@@ -38,14 +48,14 @@ export function TopBar({ currentView }: TopBarProps) {
 
           <div className="flex items-center gap-2.5 pl-2 sm:pl-3 sm:border-l sm:border-stone-200">
             <div className="text-right hidden sm:block">
-              <p className="text-sm font-semibold text-stone-800 leading-none">{artisan.name}</p>
+              <p className="text-sm font-semibold text-stone-800 leading-none">{profile.name}</p>
               <div className="flex items-center justify-end gap-1 mt-0.5">
                 <Star className="w-3 h-3 fill-accent-400 text-accent-400" />
-                <span className="text-[11px] text-stone-500">{artisan.rating} · {artisan.craft}</span>
+                <span className="text-[11px] text-stone-500">{role === 'buyer' ? 'Buyer' : `${artisan.rating} · ${artisan.craft}`}</span>
               </div>
             </div>
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-bold text-sm shadow-soft">
-              {artisan.name.split(' ').map(n => n[0]).join('')}
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-secondary-400 to-secondary-600 flex items-center justify-center text-white font-bold text-sm shadow-soft">
+              {profile.name.split(' ').map(n => n[0]).join('')}
             </div>
           </div>
         </div>

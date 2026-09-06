@@ -1,4 +1,4 @@
-import type { Product, Bid, Artisan, ChatMessage, ProductInsight } from './types';
+import type { Product, Bid, Artisan, ChatMessage, ProductInsight, BuyerOrder, BuyerAddress, BuyerPayment, Buyer } from './types';
 
 export const artisan: Artisan = {
   name: 'Ramesh Kumar',
@@ -216,4 +216,114 @@ export const aiSuggestions: string[] = [
   'Find buyers for my pottery in Delhi',
   'Help me write a product description',
   'Which markets are best for brass items?',
+];
+
+export const buyer: Buyer = {
+  name: 'Priya Sharma',
+  totalOrders: 12,
+  activeBids: 3,
+  totalSpent: 28650,
+  savedAddresses: 2,
+};
+
+export const buyerOrders: BuyerOrder[] = [
+  {
+    id: 'o1',
+    productName: 'Hand-painted Blue Ceramic Vase',
+    productImage: 'https://images.pexels.com/photos/18646120/pexels-photo-18646120.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    artisan: 'Ramesh Kumar',
+    craft: 'Blue Pottery',
+    amount: 1450,
+    status: 'delivered',
+    orderDate: '2026-08-15',
+    deliveryDate: '2026-08-22',
+    address: 'Home — Bengaluru, KA',
+  },
+  {
+    id: 'o2',
+    productName: 'Traditional Brass Earrings',
+    productImage: 'https://images.pexels.com/photos/15955332/pexels-photo-15955332.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    artisan: 'Lakshmi Devi',
+    craft: 'Brass Jewellery',
+    amount: 920,
+    status: 'shipped',
+    orderDate: '2026-09-01',
+    deliveryDate: '2026-09-08',
+    address: 'Office — Bengaluru, KA',
+  },
+  {
+    id: 'o3',
+    productName: 'Handwoven Cotton Saree',
+    productImage: 'https://images.pexels.com/photos/34131689/pexels-photo-34131689.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    artisan: 'Sita Bai',
+    craft: 'Handloom Weaving',
+    amount: 2600,
+    status: 'processing',
+    orderDate: '2026-09-03',
+    deliveryDate: '2026-09-12',
+    address: 'Home — Bengaluru, KA',
+  },
+  {
+    id: 'o4',
+    productName: 'Gemstone Gold Ring',
+    productImage: 'https://images.pexels.com/photos/32382389/pexels-photo-32382389.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    artisan: 'Vikram Singh',
+    craft: 'Jewellery Making',
+    amount: 3500,
+    status: 'won',
+    orderDate: '2026-09-05',
+    deliveryDate: '—',
+    address: 'Home — Bengaluru, KA',
+  },
+];
+
+export const buyerAddresses: BuyerAddress[] = [
+  {
+    id: 'a1',
+    label: 'Home',
+    name: 'Priya Sharma',
+    phone: '+91 98765 43210',
+    line1: 'Flat 402, Green Meadows Apartments',
+    line2: 'HSR Layout, Sector 2',
+    city: 'Bengaluru',
+    state: 'Karnataka',
+    pincode: '560102',
+    isDefault: true,
+  },
+  {
+    id: 'a2',
+    label: 'Office',
+    name: 'Priya Sharma',
+    phone: '+91 98765 43210',
+    line1: 'Tower B, 5th Floor',
+    line2: 'Outer Ring Road, Bellandur',
+    city: 'Bengaluru',
+    state: 'Karnataka',
+    pincode: '560103',
+    isDefault: false,
+  },
+];
+
+export const buyerPayments: BuyerPayment[] = [
+  {
+    id: 'pay1',
+    type: 'upi',
+    label: 'UPI',
+    detail: 'priya.sharma@okhdfcbank',
+    isDefault: true,
+  },
+  {
+    id: 'pay2',
+    type: 'card',
+    label: 'Credit Card',
+    detail: '•••• •••• •••• 4521 (Visa)',
+    isDefault: false,
+  },
+  {
+    id: 'pay3',
+    type: 'netbanking',
+    label: 'Net Banking',
+    detail: 'HDFC Bank — Savings ••••7890',
+    isDefault: false,
+  },
 ];

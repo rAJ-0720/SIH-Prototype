@@ -164,7 +164,86 @@ export type TKey =
   | 'low'
   | 'rising'
   | 'stable'
-  | 'declining';
+  | 'declining'
+  | 'choose_language'
+  | 'choose_language_desc'
+  | 'speak_your_language'
+  | 'tap_to_speak'
+  | 'listening'
+  | 'who_are_you'
+  | 'who_are_you_desc'
+  | 'i_am_artisan'
+  | 'i_am_buyer'
+  | 'artisan_role_desc'
+  | 'buyer_role_desc'
+  | 'continue_btn'
+  | 'voice_input'
+  | 'voice_listening'
+  | 'voice_catalogue_hint'
+  | 'voice_processing'
+  | 'voice_no_speech'
+  | 'voice_error'
+  | 'voice_unsupported'
+  | 'buyer_home'
+  | 'buyer_home_desc'
+  | 'buyer_orders_nav'
+  | 'buyer_orders_nav_desc'
+  | 'buyer_addresses_nav'
+  | 'buyer_addresses_nav_desc'
+  | 'buyer_payments_nav'
+  | 'buyer_payments_nav_desc'
+  | 'buyer_dashboard'
+  | 'welcome_buyer'
+  | 'buyer_greeting'
+  | 'browse_market'
+  | 'browse_market_desc'
+  | 'my_orders'
+  | 'my_orders_desc'
+  | 'total_orders'
+  | 'active_bids_count'
+  | 'total_spent'
+  | 'recent_orders'
+  | 'view_all'
+  | 'delivered'
+  | 'shipped'
+  | 'processing'
+  | 'won'
+  | 'order_date'
+  | 'delivery_date'
+  | 'delivery_address'
+  | 'order_id'
+  | 'order_amount'
+  | 'order_status'
+  | 'no_orders'
+  | 'no_orders_desc'
+  | 'saved_addresses'
+  | 'saved_addresses_desc'
+  | 'add_address'
+  | 'edit_address'
+  | 'default_address'
+  | 'set_default'
+  | 'address_label'
+  | 'full_name'
+  | 'phone_number'
+  | 'address_line1'
+  | 'address_line2'
+  | 'city'
+  | 'state'
+  | 'pincode'
+  | 'save_address'
+  | 'no_addresses'
+  | 'no_addresses_desc'
+  | 'payment_methods'
+  | 'payment_methods_desc'
+  | 'add_payment'
+  | 'default_payment'
+  | 'upi'
+  | 'card'
+  | 'netbanking'
+  | 'no_payments'
+  | 'no_payments_desc'
+  | 'recent_bids'
+  | 'items_won';
 
 type TranslationDict = Record<TKey, string>;
 
@@ -311,6 +390,85 @@ const en: TranslationDict = {
   rising: 'rising',
   stable: 'stable',
   declining: 'declining',
+  choose_language: 'Choose Your Language',
+  choose_language_desc: 'Select your preferred language to continue',
+  speak_your_language: 'Tap to speak your language',
+  tap_to_speak: 'Tap to speak',
+  listening: 'Listening...',
+  who_are_you: 'Who are you?',
+  who_are_you_desc: 'Tell us how you will use Karigar AI',
+  i_am_artisan: 'I am an Artisan',
+  i_am_buyer: 'I am a Buyer',
+  artisan_role_desc: 'Sell your crafts with AI assistance',
+  buyer_role_desc: 'Discover and bid on artisan products',
+  continue_btn: 'Continue',
+  voice_input: 'Voice input',
+  voice_listening: 'Listening...',
+  voice_catalogue_hint: 'Say a product name or describe your craft...',
+  voice_processing: 'Processing voice...',
+  voice_no_speech: 'No speech detected. Please try again.',
+  voice_error: 'Voice input error. Please try again.',
+  voice_unsupported: 'Voice input is not supported in this browser.',
+  buyer_home: 'Dashboard',
+  buyer_home_desc: 'Your buyer dashboard',
+  buyer_orders_nav: 'My Orders',
+  buyer_orders_nav_desc: 'Track your purchases',
+  buyer_addresses_nav: 'Addresses',
+  buyer_addresses_nav_desc: 'Saved delivery addresses',
+  buyer_payments_nav: 'Payments',
+  buyer_payments_nav_desc: 'Manage payment methods',
+  buyer_dashboard: 'Buyer Dashboard',
+  welcome_buyer: 'Welcome',
+  buyer_greeting: 'Discover unique handcrafted products from artisans across India. Bid on items you love and get them delivered to your door.',
+  browse_market: 'Browse Bidding Market',
+  browse_market_desc: 'Explore live auctions from artisans across India. Place bids on unique handcrafted items.',
+  my_orders: 'My Orders',
+  my_orders_desc: 'Track your orders and bids',
+  total_orders: 'Total Orders',
+  active_bids_count: 'Active Bids',
+  total_spent: 'Total Spent',
+  recent_orders: 'Recent Orders',
+  view_all: 'View All',
+  delivered: 'Delivered',
+  shipped: 'Shipped',
+  processing: 'Processing',
+  won: 'Bid Won',
+  order_date: 'Order Date',
+  delivery_date: 'Delivery Date',
+  delivery_address: 'Delivery Address',
+  order_id: 'Order ID',
+  order_amount: 'Amount',
+  order_status: 'Status',
+  no_orders: 'No orders yet',
+  no_orders_desc: 'Start bidding on products to see your orders here.',
+  saved_addresses: 'Saved Addresses',
+  saved_addresses_desc: 'Manage your delivery addresses',
+  add_address: 'Add Address',
+  edit_address: 'Edit',
+  default_address: 'Default',
+  set_default: 'Set Default',
+  address_label: 'Address Label (e.g. Home, Office)',
+  full_name: 'Full Name',
+  phone_number: 'Phone Number',
+  address_line1: 'Address Line 1',
+  address_line2: 'Address Line 2',
+  city: 'City',
+  state: 'State',
+  pincode: 'Pincode',
+  save_address: 'Save Address',
+  no_addresses: 'No saved addresses',
+  no_addresses_desc: 'Add a delivery address to speed up your checkout.',
+  payment_methods: 'Payment Methods',
+  payment_methods_desc: 'Manage your saved payment options',
+  add_payment: 'Add Payment Method',
+  default_payment: 'Default',
+  upi: 'UPI',
+  card: 'Card',
+  netbanking: 'Net Banking',
+  no_payments: 'No saved payment methods',
+  no_payments_desc: 'Add a payment method for faster checkout.',
+  recent_bids: 'Your Active Bids',
+  items_won: 'Items Won',
 };
 
 const hi: TranslationDict = {
@@ -456,6 +614,85 @@ const hi: TranslationDict = {
   rising: 'बढ़ता',
   stable: 'स्थिर',
   declining: 'घटता',
+  choose_language: 'अपनी भाषा चुनिए',
+  choose_language_desc: 'जारी रखने के लिए अपनी पसंदीदा भाषा चुनिए',
+  speak_your_language: 'अपनी भाषा बोलने के लिए टैप करें',
+  tap_to_speak: 'बोलने के लिए टैप करें',
+  listening: 'सुन रहा हूँ...',
+  who_are_you: 'आप कौन हैं?',
+  who_are_you_desc: 'बताइए आप कारीगर एआई का इस्तेमाल कैसे करेंगे',
+  i_am_artisan: 'मैं कारीगर हूँ',
+  i_am_buyer: 'मैं खरीदार हूँ',
+  artisan_role_desc: 'एआई की मदद से अपनी कलाएँ बेचें',
+  buyer_role_desc: 'कारीगर उत्पादों पर बोली लगाइए',
+  continue_btn: 'जारी रखें',
+  voice_input: 'वॉइस इनपुट',
+  voice_listening: 'सुन रहा हूँ...',
+  voice_catalogue_hint: 'उत्पाद का नाम बोलें या अपनी कला का वर्णन करें...',
+  voice_processing: 'वॉइस प्रोसेस हो रहा है...',
+  voice_no_speech: 'कोई आवाज़ नहीं सुनाई दी। कृपया दोबारा कोशिश करें।',
+  voice_error: 'वॉइस इनपुट में त्रुटि। कृपया दोबारा कोशिश करें।',
+  voice_unsupported: 'इस ब्राउज़र में वॉइस इनपुट समर्थित नहीं है।',
+  buyer_home: 'डैशबोर्ड',
+  buyer_home_desc: 'आपका खरीदार डैशबोर्ड',
+  buyer_orders_nav: 'मेरे ऑर्डर',
+  buyer_orders_nav_desc: 'अपनी खरीद ट्रैक करें',
+  buyer_addresses_nav: 'पते',
+  buyer_addresses_nav_desc: 'सहेजे हुए डिलीवरी पते',
+  buyer_payments_nav: 'भुगतान',
+  buyer_payments_nav_desc: 'भुगतान विधियाँ प्रबंधित करें',
+  buyer_dashboard: 'खरीदार डैशबोर्ड',
+  welcome_buyer: 'स्वागत है',
+  buyer_greeting: 'भारत भर के कारीगरों से अनोखी हस्तनिर्मित चीज़ें खोजिए। पसंद की चीज़ों पर बोली लगाइए और घर तक डिलीवरी पाइए।',
+  browse_market: 'बोली बाज़ार देखें',
+  browse_market_desc: 'भारत भर के कारीगरों की लाइव नीलामी देखिए। अनोखी हस्तनिर्मित चीज़ों पर बोली लगाइए।',
+  my_orders: 'मेरे ऑर्डर',
+  my_orders_desc: 'अपने ऑर्डर और बोलियाँ ट्रैक करें',
+  total_orders: 'कुल ऑर्डर',
+  active_bids_count: 'सक्रिय बोलियाँ',
+  total_spent: 'कुल खर्च',
+  recent_orders: 'हाल के ऑर्डर',
+  view_all: 'सभी देखें',
+  delivered: 'डिलीवर हुआ',
+  shipped: 'भेजा गया',
+  processing: 'प्रोसेस हो रहा',
+  won: 'बोली जीती',
+  order_date: 'ऑर्डर तारीख',
+  delivery_date: 'डिलीवरी तारीख',
+  delivery_address: 'डिलीवरी पता',
+  order_id: 'ऑर्डर आईडी',
+  order_amount: 'राशि',
+  order_status: 'स्थिति',
+  no_orders: 'अभी कोई ऑर्डर नहीं',
+  no_orders_desc: 'प्रोडक्ट पर बोली लगाना शुरू करें ताकि आपके ऑर्डर यहाँ दिखें।',
+  saved_addresses: 'सहेजे हुए पते',
+  saved_addresses_desc: 'अपने डिलीवरी पते प्रबंधित करें',
+  add_address: 'पता जोड़ें',
+  edit_address: 'संपादित करें',
+  default_address: 'डिफ़ॉल्ट',
+  set_default: 'डिफ़ॉल्ट बनाएँ',
+  address_label: 'पता लेबल (जैसे घर, ऑफ़िस)',
+  full_name: 'पूरा नाम',
+  phone_number: 'फ़ोन नंबर',
+  address_line1: 'पता लाइन 1',
+  address_line2: 'पता लाइन 2',
+  city: 'शहर',
+  state: 'राज्य',
+  pincode: 'पिनकोड',
+  save_address: 'पता सहेजें',
+  no_addresses: 'कोई सहेजा हुआ पता नहीं',
+  no_addresses_desc: 'चेकआउट तेज़ करने के लिए डिलीवरी पता जोड़ें।',
+  payment_methods: 'भुगतान विधियाँ',
+  payment_methods_desc: 'अपने सहेजे हुए भुगतान तरीके प्रबंधित करें',
+  add_payment: 'भुगतान विधि जोड़ें',
+  default_payment: 'डिफ़ॉल्ट',
+  upi: 'यूपीआई',
+  card: 'कार्ड',
+  netbanking: 'नेट बैंकिंग',
+  no_payments: 'कोई सहेजी हुई भुगतान विधि नहीं',
+  no_payments_desc: 'तेज़ चेकआउट के लिए भुगतान विधि जोड़ें।',
+  recent_bids: 'आपकी सक्रिय बोलियाँ',
+  items_won: 'जीती हुई चीज़ें',
 };
 
 const bn: TranslationDict = {

@@ -7,6 +7,10 @@ import {
   Menu,
   X,
   LogOut,
+  LayoutDashboard,
+  Package,
+  MapPin,
+  CreditCard,
 } from 'lucide-react';
 import { useLanguage } from '@/language-context';
 import type { View } from '@/types';
@@ -19,10 +23,18 @@ interface NavItem {
   icon: typeof Home;
 }
 
-const navItems: NavItem[] = [
+const artisanNav: NavItem[] = [
   { id: 'home', labelKey: 'home', descKey: 'home_desc', icon: Home },
   { id: 'upload', labelKey: 'add_product_nav', descKey: 'add_product_nav_desc', icon: Upload },
   { id: 'bidding', labelKey: 'bidding_nav', descKey: 'bidding_nav_desc', icon: Gavel },
+];
+
+const buyerNav: NavItem[] = [
+  { id: 'buyer_home', labelKey: 'buyer_home', descKey: 'buyer_home_desc', icon: LayoutDashboard },
+  { id: 'bidding', labelKey: 'bidding_nav', descKey: 'browse_market_desc', icon: Gavel },
+  { id: 'buyer_orders', labelKey: 'buyer_orders_nav', descKey: 'buyer_orders_nav_desc', icon: Package },
+  { id: 'buyer_addresses', labelKey: 'buyer_addresses_nav', descKey: 'buyer_addresses_nav_desc', icon: MapPin },
+  { id: 'buyer_payments', labelKey: 'buyer_payments_nav', descKey: 'buyer_payments_nav_desc', icon: CreditCard },
 ];
 
 interface SidebarProps {
@@ -33,7 +45,9 @@ interface SidebarProps {
 
 export function Sidebar({ currentView, onNavigate, onLogout }: SidebarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { t } = useLanguage();
+  const { t, role } = useLanguage();
+
+  const navItems = role === 'buyer' ? buyerNav : artisanNav;
 
   const handleNavigate = (view: View) => {
     onNavigate(view);

@@ -1,4 +1,4 @@
-export type View = 'home' | 'upload' | 'bidding';
+export type View = 'home' | 'upload' | 'bidding' | 'buyer_home' | 'buyer_orders' | 'buyer_addresses' | 'buyer_payments';
 
 export interface Product {
   id: string;
@@ -64,4 +64,46 @@ export interface ChatMessage {
   sender: 'user' | 'ai';
   text: string;
   time: string;
+}
+
+export interface BuyerOrder {
+  id: string;
+  productName: string;
+  productImage: string;
+  artisan: string;
+  craft: string;
+  amount: number;
+  status: 'delivered' | 'shipped' | 'processing' | 'won';
+  orderDate: string;
+  deliveryDate: string;
+  address: string;
+}
+
+export interface BuyerAddress {
+  id: string;
+  label: string;
+  name: string;
+  phone: string;
+  line1: string;
+  line2: string;
+  city: string;
+  state: string;
+  pincode: string;
+  isDefault: boolean;
+}
+
+export interface BuyerPayment {
+  id: string;
+  type: 'upi' | 'card' | 'netbanking';
+  label: string;
+  detail: string;
+  isDefault: boolean;
+}
+
+export interface Buyer {
+  name: string;
+  totalOrders: number;
+  activeBids: number;
+  totalSpent: number;
+  savedAddresses: number;
 }

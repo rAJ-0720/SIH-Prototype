@@ -1,9 +1,13 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
 import { type LangCode, t as translate, type TKey } from './i18n';
 
+export type Role = 'artisan' | 'buyer';
+
 interface LanguageContextValue {
   lang: LangCode;
   setLang: (lang: LangCode) => void;
+  role: Role;
+  setRole: (role: Role) => void;
   t: (key: TKey) => string;
 }
 
@@ -11,11 +15,12 @@ const LanguageContext = createContext<LanguageContextValue | undefined>(undefine
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<LangCode>('en');
+  const [role, setRole] = useState<Role>('artisan');
 
   const t = (key: TKey) => translate(lang, key);
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, t }}>
+    <LanguageContext.Provider value={{ lang, setLang, role, setRole, t }}>
       {children}
     </LanguageContext.Provider>
   );
