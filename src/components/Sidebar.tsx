@@ -8,19 +8,21 @@ import {
   X,
   LogOut,
 } from 'lucide-react';
+import { useLanguage } from '@/language-context';
 import type { View } from '@/types';
+import type { TKey } from '@/i18n';
 
 interface NavItem {
   id: View;
-  label: string;
+  labelKey: TKey;
+  descKey: TKey;
   icon: typeof Home;
-  description: string;
 }
 
 const navItems: NavItem[] = [
-  { id: 'home', label: 'Home', icon: Home, description: 'Your AI Manager' },
-  { id: 'upload', label: 'Add Product', icon: Upload, description: 'Upload & get AI insights' },
-  { id: 'bidding', label: 'Bidding Market', icon: Gavel, description: 'Sell to buyers near you' },
+  { id: 'home', labelKey: 'home', descKey: 'home_desc', icon: Home },
+  { id: 'upload', labelKey: 'add_product_nav', descKey: 'add_product_nav_desc', icon: Upload },
+  { id: 'bidding', labelKey: 'bidding_nav', descKey: 'bidding_nav_desc', icon: Gavel },
 ];
 
 interface SidebarProps {
@@ -31,6 +33,7 @@ interface SidebarProps {
 
 export function Sidebar({ currentView, onNavigate, onLogout }: SidebarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { t } = useLanguage();
 
   const handleNavigate = (view: View) => {
     onNavigate(view);
@@ -39,7 +42,6 @@ export function Sidebar({ currentView, onNavigate, onLogout }: SidebarProps) {
 
   return (
     <>
-      {/* Mobile header bar */}
       <div className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-md border-b border-stone-200 px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
@@ -56,7 +58,6 @@ export function Sidebar({ currentView, onNavigate, onLogout }: SidebarProps) {
         </button>
       </div>
 
-      {/* Mobile overlay */}
       {mobileOpen && (
         <div
           className="lg:hidden fixed inset-0 z-40 bg-stone-900/40 backdrop-blur-sm"
@@ -64,26 +65,23 @@ export function Sidebar({ currentView, onNavigate, onLogout }: SidebarProps) {
         />
       )}
 
-      {/* Sidebar */}
       <aside
         className={`fixed top-0 left-0 z-50 h-full w-72 bg-white border-r border-stone-200 flex flex-col transition-transform duration-300 lg:translate-x-0 ${
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        {/* Logo */}
         <div className="h-16 px-6 flex items-center gap-3 border-b border-stone-100">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-soft">
             <Sparkles className="w-5 h-5 text-white" />
           </div>
           <div>
             <h1 className="font-display font-bold text-lg text-stone-900 leading-none">KARIGAR<span className="text-primary-600"> AI</span></h1>
-            <p className="text-[10px] text-stone-400 font-medium tracking-wide uppercase mt-0.5">AI Business Manager</p>
+            <p className="text-[10px] text-stone-400 font-medium tracking-wide uppercase mt-0.5">{t('ai_business_manager')}</p>
           </div>
         </div>
 
-        {/* Navigation */}
         <nav className="flex-1 px-3 py-4 overflow-y-auto scrollbar-hide">
-          <p className="px-3 mb-2 text-[10px] font-semibold text-stone-400 uppercase tracking-wider">Menu</p>
+          <p className="px-3 mb-2 text-[10px] font-semibold text-stone-400 uppercase tracking-wider">{t('menu')}</p>
           <div className="space-y-1">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -104,8 +102,8 @@ export function Sidebar({ currentView, onNavigate, onLogout }: SidebarProps) {
                     <Icon className="w-5 h-5" strokeWidth={2} />
                   </div>
                   <div className="flex-1 text-left">
-                    <p className={`text-sm font-semibold ${active ? 'text-primary-700' : 'text-stone-700'}`}>{item.label}</p>
-                    <p className="text-[11px] text-stone-400">{item.description}</p>
+                    <p className={`text-sm font-semibold ${active ? 'text-primary-700' : 'text-stone-700'}`}>{t(item.labelKey)}</p>
+                    <p className="text-[11px] text-stone-400">{t(item.descKey)}</p>
                   </div>
                 </button>
               );
@@ -113,7 +111,6 @@ export function Sidebar({ currentView, onNavigate, onLogout }: SidebarProps) {
           </div>
         </nav>
 
-        {/* Logout */}
         <div className="p-3">
           <button
             onClick={onLogout}
@@ -122,7 +119,7 @@ export function Sidebar({ currentView, onNavigate, onLogout }: SidebarProps) {
             <div className="w-9 h-9 rounded-lg bg-stone-100 flex items-center justify-center">
               <LogOut className="w-4.5 h-4.5" />
             </div>
-            <span className="text-sm font-medium">Logout</span>
+            <span className="text-sm font-medium">{t('logout')}</span>
           </button>
         </div>
       </aside>

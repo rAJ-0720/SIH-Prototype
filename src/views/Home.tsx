@@ -11,6 +11,7 @@ import {
   Bot,
 } from 'lucide-react';
 import { artisan, products, initialChatMessages, aiSuggestions } from '@/data';
+import { useLanguage } from '@/language-context';
 import type { View, ChatMessage } from '@/types';
 
 interface HomeProps {
@@ -45,6 +46,7 @@ function getAiResponse(userText: string): string {
 }
 
 export function Home({ onNavigate }: HomeProps) {
+  const { t } = useLanguage();
   const [messages, setMessages] = useState<ChatMessage[]>(initialChatMessages);
   const [input, setInput] = useState('');
   const [aiTyping, setAiTyping] = useState(false);
@@ -90,13 +92,13 @@ export function Home({ onNavigate }: HomeProps) {
         <div className="relative">
           <div className="flex items-center gap-2 mb-3">
             <Sparkles className="w-4 h-4 text-primary-400" />
-            <span className="text-xs font-medium text-primary-400 uppercase tracking-wider">Your AI Business Manager</span>
+            <span className="text-xs font-medium text-primary-400 uppercase tracking-wider">{t('ai_business_manager')}</span>
           </div>
           <h1 className="font-display text-2xl sm:text-3xl font-bold text-white mb-2 text-balance">
-            Namaste, {artisan.name}
+            {t('namaste')}, {artisan.name}
           </h1>
           <p className="text-stone-300 text-sm sm:text-base max-w-xl leading-relaxed">
-            I'm here to help you sell more. Ask me anything, or pick an action below to get started.
+            {t('home_greeting')}
           </p>
         </div>
       </div>
@@ -110,10 +112,10 @@ export function Home({ onNavigate }: HomeProps) {
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center mb-4 shadow-soft group-hover:scale-110 transition-transform">
             <Upload className="w-7 h-7 text-white" />
           </div>
-          <h3 className="font-display font-bold text-lg text-stone-900 mb-1">Add a Product</h3>
-          <p className="text-sm text-stone-500 leading-relaxed">Upload a photo and I'll instantly analyze it — price, description, market demand, everything you need to know.</p>
+          <h3 className="font-display font-bold text-lg text-stone-900 mb-1">{t('add_product')}</h3>
+          <p className="text-sm text-stone-500 leading-relaxed">{t('add_product_desc')}</p>
           <div className="flex items-center gap-1 mt-3 text-primary-600 text-sm font-medium">
-            Get started <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            {t('get_started')} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </div>
         </button>
 
@@ -124,10 +126,10 @@ export function Home({ onNavigate }: HomeProps) {
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary-500 to-secondary-700 flex items-center justify-center mb-4 shadow-soft group-hover:scale-110 transition-transform">
             <Gavel className="w-7 h-7 text-white" />
           </div>
-          <h3 className="font-display font-bold text-lg text-stone-900 mb-1">Bidding Market</h3>
-          <p className="text-sm text-stone-500 leading-relaxed">See live bids from buyers near you. Place your products and let buyers compete to give you the best price.</p>
+          <h3 className="font-display font-bold text-lg text-stone-900 mb-1">{t('bidding_market')}</h3>
+          <p className="text-sm text-stone-500 leading-relaxed">{t('bidding_market_desc')}</p>
           <div className="flex items-center gap-1 mt-3 text-secondary-600 text-sm font-medium">
-            View market <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            {t('view_market')} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </div>
         </button>
       </div>
@@ -136,7 +138,6 @@ export function Home({ onNavigate }: HomeProps) {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* AI Chat */}
         <div className="lg:col-span-2 card overflow-hidden flex flex-col" style={{ height: '500px' }}>
-          {/* Chat header */}
           <div className="px-5 py-4 border-b border-stone-100 flex items-center gap-3">
             <div className="relative">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
@@ -145,12 +146,11 @@ export function Home({ onNavigate }: HomeProps) {
               <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-success-500 ring-2 ring-white" />
             </div>
             <div>
-              <h3 className="font-display font-semibold text-stone-900 text-sm">Karigar AI</h3>
-              <p className="text-[11px] text-success-600 font-medium">Online · Powered by HuggingFace</p>
+              <h3 className="font-display font-semibold text-stone-900 text-sm">{t('karigar_ai')}</h3>
+              <p className="text-[11px] text-success-600 font-medium">{t('online_powered')}</p>
             </div>
           </div>
 
-          {/* Chat messages */}
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-5 py-4 space-y-4 scrollbar-hide">
             {messages.map(msg => (
               <div key={msg.id} className={`flex gap-2.5 ${msg.sender === 'user' ? 'flex-row-reverse' : ''}`}>
@@ -172,7 +172,6 @@ export function Home({ onNavigate }: HomeProps) {
               </div>
             ))}
 
-            {/* AI typing indicator */}
             {aiTyping && (
               <div className="flex gap-2.5">
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center flex-shrink-0">
@@ -191,7 +190,6 @@ export function Home({ onNavigate }: HomeProps) {
             )}
           </div>
 
-          {/* Suggestion chips */}
           {messages.length <= 1 && (
             <div className="px-5 pb-2 flex flex-wrap gap-2">
               {aiSuggestions.map(s => (
@@ -206,7 +204,6 @@ export function Home({ onNavigate }: HomeProps) {
             </div>
           )}
 
-          {/* Input */}
           <div className="p-4 border-t border-stone-100">
             <div className="flex items-center gap-2 bg-stone-50 rounded-xl border border-stone-200 pr-2">
               <input
@@ -214,7 +211,7 @@ export function Home({ onNavigate }: HomeProps) {
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 onKeyDown={e => { if (e.key === 'Enter') sendMessage(input); }}
-                placeholder="Ask me anything about your business..."
+                placeholder={t('ask_anything')}
                 className="flex-1 bg-transparent px-4 py-3 text-sm text-stone-700 placeholder:text-stone-400 outline-none"
               />
               <button
@@ -236,12 +233,12 @@ export function Home({ onNavigate }: HomeProps) {
                 <IndianRupee className="w-4.5 h-4.5 text-success-600" />
               </div>
               <div>
-                <p className="text-xs text-stone-500">This month's earnings</p>
+                <p className="text-xs text-stone-500">{t('month_earnings')}</p>
                 <p className="text-xl font-display font-bold text-stone-900">₹{artisan.monthlyEarnings.toLocaleString('en-IN')}</p>
               </div>
             </div>
             <div className="flex items-center gap-1.5 text-xs text-success-600 font-medium">
-              <TrendingUp className="w-3.5 h-3.5" /> +{artisan.growth}% from last month
+              <TrendingUp className="w-3.5 h-3.5" /> +{artisan.growth}% {t('from_last_month')}
             </div>
           </div>
 
@@ -251,18 +248,17 @@ export function Home({ onNavigate }: HomeProps) {
                 <Package className="w-4.5 h-4.5 text-primary-600" />
               </div>
               <div>
-                <p className="text-xs text-stone-500">Products in catalogue</p>
-                <p className="text-xl font-display font-bold text-stone-900">{artisan.totalProducts} products</p>
+                <p className="text-xs text-stone-500">{t('products_catalogue')}</p>
+                <p className="text-xl font-display font-bold text-stone-900">{artisan.totalProducts} {t('products')}</p>
               </div>
             </div>
             <div className="flex items-center gap-1.5 text-xs text-stone-500">
-              <Sparkles className="w-3.5 h-3.5 text-primary-500" /> {artisan.totalSales} total sales
+              <Sparkles className="w-3.5 h-3.5 text-primary-500" /> {artisan.totalSales} {t('total_sales')}
             </div>
           </div>
 
-          {/* Top products mini list */}
           <div className="card p-5">
-            <h3 className="font-display font-semibold text-stone-900 text-sm mb-3">Your Top Products</h3>
+            <h3 className="font-display font-semibold text-stone-900 text-sm mb-3">{t('your_top_products')}</h3>
             <div className="space-y-2.5">
               {topProducts.map((p, i) => (
                 <div key={p.id} className="flex items-center gap-2.5">
@@ -270,7 +266,7 @@ export function Home({ onNavigate }: HomeProps) {
                   <img src={p.image} alt={p.name} className="w-9 h-9 rounded-lg object-cover flex-shrink-0" />
                   <div className="flex-1 min-w-0">
                     <p className="text-xs font-medium text-stone-700 truncate">{p.name}</p>
-                    <p className="text-[10px] text-stone-400">₹{p.price} · {p.views} views</p>
+                    <p className="text-[10px] text-stone-400">₹{p.price} · {p.views} {t('views')}</p>
                   </div>
                 </div>
               ))}
